@@ -34,6 +34,8 @@ class CODL_Product_Fields {
             'desc_tip'    => true,
         ));
 
+        wp_nonce_field('cod_product_meta_nonce', 'cod_product_meta_nonce');
+
         echo '</div>';
     }
 
@@ -41,6 +43,21 @@ class CODL_Product_Fields {
      * Guarda el valor del campo personalizado
      */
     public function save_cod_disable_field($post_id) {
+        // Verificar nonce
+        if (!isset($_POST['cod_product_meta_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['cod_product_meta_nonce'])), 'cod_product_meta_nonce')) {
+            return;
+        }
+
+        // Verificar si es un autoguardado
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        // Verificar permisos
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
         $cod_disable_button = isset($_POST['_cod_disable_button']) ? 'yes' : 'no';
         update_post_meta($post_id, '_cod_disable_button', $cod_disable_button);
     }

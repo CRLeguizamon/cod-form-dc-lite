@@ -69,9 +69,14 @@ class CODL_Ajax_Handler {
      * Cargar contenido del modal
      */
     public function load_modal_content() {
+        // Verificar nonce para seguridad
+        if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['_wpnonce'])), 'cod_load_modal_nonce')) {
+            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+        }
+        
         // Recibe los datos enviados por AJAX
-        $current_url = isset($_REQUEST['current_url']) ? sanitize_text_field($_REQUEST['current_url']) : '';
-        $current_page_title = isset($_REQUEST['current_page_title']) ? sanitize_text_field($_REQUEST['current_page_title']) : '';
+        $current_url = isset($_REQUEST['current_url']) ? sanitize_text_field(wp_unslash($_REQUEST['current_url'])) : '';
+        $current_page_title = isset($_REQUEST['current_page_title']) ? sanitize_text_field(wp_unslash($_REQUEST['current_page_title'])) : '';
         $product_id = isset($_REQUEST['product_id']) ? intval($_REQUEST['product_id']) : '';
 
         // Hazlos disponibles para la plantilla

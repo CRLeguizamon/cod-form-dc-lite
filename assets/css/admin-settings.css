@@ -191,6 +191,7 @@
 .cod-form-settings .subsubsub a.current {
     background: #f0f0f0;
     color: #000;
+    padding: 8px 16px !important;
 }
 
 /* Campos de formulario */
@@ -214,13 +215,13 @@
 .cod-form-settings textarea,
 .cod-form-settings select {
     width: 100%;
-    max-width: 500px;
     padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 14px;
     transition: all 0.2s ease;
     background: #fff;
+    box-sizing: border-box;
 }
 
 .cod-form-settings input[type="text"]:focus,
@@ -245,7 +246,8 @@
 
 /* Campos numéricos */
 .cod-form-settings input[type="number"] {
-    width: 120px;
+    width: 150px;
+    min-width: 100px;
 }
 
 /* Campos de texto largo */
@@ -295,7 +297,6 @@
 /* Campos específicos */
 .cod-form-settings .image-url-field {
     width: 100%;
-    max-width: 500px;
 }
 
 .cod-form-settings .terms-field {
@@ -306,10 +307,8 @@
 .cod-form-settings .country-field,
 .cod-form-settings .button-field,
 .cod-form-settings .redirect-field,
-.cod-form-settings ,
 .cod-form-settings .menu-icon-field {
     width: 100%;
-    max-width: 500px;
 }
 
 /* Títulos de sección */
@@ -375,16 +374,19 @@
 /* Campos de fecha */
 .cod-form-settings input[type="date"] {
     width: 200px;
+    min-width: 150px;
 }
 
 /* Campos de tiempo */
 .cod-form-settings input[type="time"] {
     width: 150px;
+    min-width: 120px;
 }
 
 /* Campos de rango */
 .cod-form-settings input[type="range"] {
     width: 200px;
+    min-width: 150px;
     margin: 10px 0;
 }
 

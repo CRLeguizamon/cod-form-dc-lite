@@ -66,36 +66,82 @@ class CODL_Settings_Manager {
     }
 
     /**
+     * Verifica si estamos en la página de configuración correcta
+     */
+    private function is_settings_page($hook) {
+        // Verificar que estemos en la página de configuración de WooCommerce
+        if ('woocommerce_page_wc-settings' !== $hook) {
+            return false;
+        }
+
+        // Verificar que estemos en la pestaña correcta
+        if (!isset($_GET['tab']) || 'cod_form' !== sanitize_text_field(wp_unslash($_GET['tab']))) {
+            return false;
+        }
+
+        // Si estamos guardando configuraciones, verificar el nonce
+        if (isset($_REQUEST['save']) || isset($_REQUEST['action'])) {
+            if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['_wpnonce'])), 'woocommerce-settings')) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Obtiene la sección actual de forma segura
+     */
+    private function get_current_section() {
+        // Verificar que estemos en la página correcta y el nonce sea válido
+        if (!$this->is_settings_page('woocommerce_page_wc-settings')) {
+            return 'general';
+        }
+
+        // Obtener y validar la sección
+        $allowed_sections = array_map(function($setting) {
+            return $setting->get_id();
+        }, $this->settings);
+
+        $section = isset($_GET['section']) ? sanitize_text_field(wp_unslash($_GET['section'])) : 'general';
+        
+        // Asegurarse de que la sección sea válida
+        return in_array($section, $allowed_sections, true) ? $section : 'general';
+    }
+
+    /**
      * Carga los estilos CSS en la administración
      */
     public function enqueue_admin_styles($hook) {
-        // Solo cargar en la página de ajustes de WooCommerce
-        if ('woocommerce_page_wc-settings' !== $hook) {
-            return;
-        }
-
-        // Verificar si estamos en la pestaña de nuestro plugin
-        if (!isset($_GET['tab']) || 'cod_form' !== $_GET['tab']) {
+        // Verificar si estamos en la página correcta
+        if (!$this->is_settings_page($hook)) {
             return;
         }
 
         // Registrar y cargar el CSS
-        wp_enqueue_style(
+        wp_register_style(
             'cod-form-admin-styles',
             CODL_DC_URL . 'assets/css/admin-settings.css',
             array(),
             CODL_DC_VERSION
         );
+        wp_enqueue_style('cod-form-admin-styles');
 
         // Registrar y cargar el JavaScript
         wp_enqueue_media();
-        wp_enqueue_script(
+        wp_register_script(
             'cod-form-admin-scripts',
             CODL_DC_URL . 'assets/js/admin-settings.js',
             array('jquery', 'media-upload'),
             CODL_DC_VERSION,
             true
         );
+        wp_enqueue_script('cod-form-admin-scripts');
+
+        // Localizar script con nonce para operaciones AJAX
+        wp_localize_script('cod-form-admin-scripts', 'codFormAdmin', array(
+            'nonce' => wp_create_nonce('cod_form_admin_nonce')
+        ));
     }
 
     /**
@@ -119,13 +165,23 @@ class CODL_Settings_Manager {
             return;
         }
 
-        $current_section = isset($_GET['section']) ? sanitize_text_field($_GET['section']) : 'general';
+        $current_section = $this->get_current_section();
 
         echo '<div class="cod-form-settings">';
         echo '<ul class="subsubsub">';
         foreach ($sections as $id => $label) {
+            $url = add_query_arg(
+                array(
+                    'page' => 'wc-settings',
+                    'tab' => 'cod_form',
+                    'section' => sanitize_title($id),
+                    '_wpnonce' => wp_create_nonce('woocommerce-settings'),
+                ),
+                admin_url('admin.php')
+            );
+            
             echo '<li>';
-            echo '<a class="' . esc_attr($current_section == $id ? 'current' : '') . '" href="' . esc_url(admin_url('admin.php?page=wc-settings&tab=cod_form&section=' . sanitize_title($id))) . '">' . esc_html($label) . '</a>';
+            echo '<a class="' . esc_attr($current_section == $id ? 'current' : '') . '" href="' . esc_url($url) . '">' . esc_html($label) . '</a>';
             echo '</li>';
         }
         echo '</ul><br class="clear" />';
@@ -136,7 +192,7 @@ class CODL_Settings_Manager {
      * Muestra las configuraciones
      */
     public function display_settings() {
-        $current_section = isset($_GET['section']) ? sanitize_text_field($_GET['section']) : 'general';
+        $current_section = $this->get_current_section();
 
         echo '<div class="cod-form-settings">';
         foreach ($this->settings as $setting) {
@@ -152,7 +208,7 @@ class CODL_Settings_Manager {
      * Guarda las configuraciones
      */
     public function save_settings() {
-        $current_section = isset($_GET['section']) ? sanitize_text_field($_GET['section']) : 'general';
+        $current_section = $this->get_current_section();
 
         foreach ($this->settings as $setting) {
             if ($setting->get_id() === $current_section) {

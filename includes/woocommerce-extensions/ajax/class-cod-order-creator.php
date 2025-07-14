@@ -57,7 +57,7 @@ class CODL_Order_Creator {
      */
     private function validate_and_process_order_data() {
         // Verificar nonce de seguridad
-        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(wp_unslash($_POST['_wpnonce']), 'cod_form_nonce')) {
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_form_nonce')) {
             wp_send_json_error(array(
                 'message' => esc_html__('Security verification failed', 'cod-form-dc-lite'),
                 'error_redirect_url' => home_url()
@@ -65,22 +65,28 @@ class CODL_Order_Creator {
             return false;
         }
 
-        // Check if required fields are set
-        if (
-            !isset($_POST['first_name'], $_POST['last_name'], $_POST['phone'], $_POST['address'], $_POST['state'], $_POST['city']) ||
-            empty(wp_unslash($_POST['first_name'])) || 
-            empty(wp_unslash($_POST['last_name'])) || 
-            empty(wp_unslash($_POST['phone'])) || 
-            empty(wp_unslash($_POST['address'])) || 
-            empty(wp_unslash($_POST['state'])) || 
-            empty(wp_unslash($_POST['city']))
-        ) {
-            $error_redirect_url = get_option('cod_form_error_redirect_url', home_url());
-            wp_send_json_error(array(
-                'message' => esc_html__('Missing required fields', 'cod-form-dc-lite'),
-                'error_redirect_url' => $error_redirect_url
-            ));
-            return false;
+        // Sanitizar y validar campos requeridos
+        $required_fields = array(
+            'first_name' => sanitize_text_field(wp_unslash($_POST['first_name'] ?? '')),
+            'last_name' => sanitize_text_field(wp_unslash($_POST['last_name'] ?? '')),
+            'phone' => sanitize_text_field(wp_unslash($_POST['phone'] ?? '')),
+            'address' => sanitize_text_field(wp_unslash($_POST['address'] ?? '')),
+            'state' => sanitize_text_field(wp_unslash($_POST['state'] ?? '')),
+            'city' => sanitize_text_field(wp_unslash($_POST['city'] ?? ''))
+        );
+
+        // Verificar que ningún campo requerido esté vacío
+        foreach ($required_fields as $field => $value) {
+            if (empty($value)) {
+                $error_redirect_url = get_option('cod_form_error_redirect_url', home_url());
+                /* translators: %s: nombre del campo del formulario que es requerido */
+                $error_message = sprintf(esc_html__('Campo %s es requerido', 'cod-form-dc-lite'), $field);
+                wp_send_json_error(array(
+                    'message' => $error_message,
+                    'error_redirect_url' => $error_redirect_url
+                ));
+                return false;
+            }
         }
 
         // Check if cart is not empty
@@ -89,23 +95,17 @@ class CODL_Order_Creator {
             return false;
         }
 
-        // Sanitize and prepare data
-        $order_data = array(
-            'first_name' => sanitize_text_field(wp_unslash($_POST['first_name'])),
-            'last_name' => sanitize_text_field(wp_unslash($_POST['last_name'])),
-            'phone' => sanitize_text_field(wp_unslash($_POST['phone'])),
-            'address' => sanitize_text_field(wp_unslash($_POST['address'])),
+        // Preparar datos de la orden con campos opcionales
+        $order_data = array_merge($required_fields, array(
             'address_2' => isset($_POST['address_2']) ? sanitize_text_field(wp_unslash($_POST['address_2'])) : '',
-            'state' => sanitize_text_field(wp_unslash($_POST['state'])),
-            'city' => sanitize_text_field(wp_unslash($_POST['city'])),
             'district' => isset($_POST['district']) ? sanitize_text_field(wp_unslash($_POST['district'])) : '',
             'email' => isset($_POST['email']) ? sanitize_email(wp_unslash($_POST['email'])) : '',
             'shipping_method' => isset($_POST['shipping_method']) ? sanitize_text_field(wp_unslash($_POST['shipping_method'])) : '',
             'shipping_code' => isset($_POST['shipping_code']) ? sanitize_text_field(wp_unslash($_POST['shipping_code'])) : '',
             'country' => WC()->countries->get_base_country(),
             'order_comments' => isset($_POST['order_comments']) ? sanitize_text_field(wp_unslash($_POST['order_comments'])) : '',
-            'terms_checkbox' => isset($_POST['terms_checkbox']) && wp_unslash($_POST['terms_checkbox']) === 'true'
-        );
+            'terms_checkbox' => isset($_POST['terms_checkbox']) ? rest_sanitize_boolean(sanitize_text_field(wp_unslash($_POST['terms_checkbox']))) : false
+        ));
 
         // Validate and get shipping data
         if ($order_data['shipping_method'] === 'free_shipping') {

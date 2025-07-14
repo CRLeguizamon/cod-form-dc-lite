@@ -17,13 +17,18 @@ class CODL_Shipping_Handler {
      * Obtener métodos de envío disponibles
      */
     public function get_methods() {
+        // Verificar nonce para seguridad
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_shipping_methods_nonce')) {
+            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+        }
+        
         // Verificar que el parámetro 'state' esté presente
         if (isset($_POST['state'])) {
-            $state = sanitize_text_field($_POST['state']);
+            $state = sanitize_text_field(wp_unslash($_POST['state']));
             
             // Obtener el país
             if (isset($_POST['country'])) {
-                $country = sanitize_text_field($_POST['country']);
+                $country = sanitize_text_field(wp_unslash($_POST['country']));
             } else {
                 // Obtener el país configurado en WooCommerce si no se proporcionó en $_POST
                 $default_country = get_option('woocommerce_default_country');

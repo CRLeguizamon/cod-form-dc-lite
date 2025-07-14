@@ -42,7 +42,7 @@ jQuery(document).ready(function($) {
             
             var formData = {
                 action: 'cod_create_order',
-                _wpnonce: $('#checkout_form input[name="_wpnonce"]').val(),
+                _wpnonce: cod_form_ajax.create_order_nonce,
                 first_name: $('#first_name').val(),
                 last_name: $('#last_name').val(),
                 phone: $('#phone').val(),
@@ -103,7 +103,8 @@ jQuery(document).ready(function($) {
             type: 'POST',
             data: {
                 action: 'get_shipping_methods',
-                state: state
+                state: state,
+                _wpnonce: cod_form_ajax.nonce
             },
             success: function(response) {
                 $('#shipping-methods').html(response);

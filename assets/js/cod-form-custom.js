@@ -51,7 +51,8 @@ jQuery(document).ready(function($) {
                 action: 'cod_form_add_to_cart',
                 product_id: product_id,
                 variation_id: variation_id,
-                quantity: quantity
+                quantity: quantity,
+                _wpnonce: cod_form_ajax.add_to_cart_nonce
             },
             beforeSend: function() {
                 utils.showLoader(); // Muestra el loader antes de enviar la solicitud
@@ -92,7 +93,8 @@ jQuery(document).ready(function($) {
             url: cod_form_ajax.ajax_url,
             type: 'GET', // Cambiar a GET porque load_modal_content no espera datos POST
             data: {
-                action: 'load_modal_content' // Usar la acción existente
+                action: 'load_modal_content', // Usar la acción existente
+                _wpnonce: cod_form_ajax.load_modal_nonce
             },
             success: function(response) {
                 $('.cod-modal-content').html(response);
@@ -120,7 +122,8 @@ jQuery(document).ready(function($) {
                 action: 'load_modal_content',
                 current_url: current_url,
                 current_page_title: current_page_title,
-                product_id: product_id
+                product_id: product_id,
+                _wpnonce: cod_form_ajax.load_modal_nonce
             },
             success: function(response) {
                 $('.cod-modal-content').html(response);
@@ -148,7 +151,8 @@ jQuery(document).ready(function($) {
             data: {
                 action: 'remove_product_from_cart',
                 cart_item_key: cart_item_key,
-                quantity: 1 // Cantidad a eliminar
+                quantity: 1, // Cantidad a eliminar
+                _wpnonce: cod_form_ajax.remove_product_nonce
             },
             beforeSend: function() {
                 utils.showLoader(); // Muestra el loader antes de enviar la solicitud

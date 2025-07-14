@@ -26,6 +26,11 @@ function enqueue_custom_scripts() {
     // Configura los datos localizados para el script cod-form-custom, proporcionando la URL de admin-ajax.php
     wp_localize_script('cod-form-custom', 'cod_form_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('cod_shipping_methods_nonce'),
+        'add_to_cart_nonce' => wp_create_nonce('cod_add_to_cart_nonce'),
+        'remove_product_nonce' => wp_create_nonce('cod_remove_product_nonce'),
+        'load_modal_nonce' => wp_create_nonce('cod_load_modal_nonce'),
+        'create_order_nonce' => wp_create_nonce('cod_form_nonce'),
         'number_of_decimals' => get_option('woocommerce_price_num_decimals', 2),
         'decimal_separator' => wc_get_price_decimal_separator(),
         'thousand_separator' => wc_get_price_thousand_separator(),

@@ -17,6 +17,11 @@ class CODL_Cart_Handler {
      * Agregar producto al carrito
      */
     public function add_to_cart() {
+        // Verificar nonce para seguridad
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_add_to_cart_nonce')) {
+            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+        }
+        
         // Obtener y validar datos
         $product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
         $variation_id = isset($_POST['variation_id']) ? intval($_POST['variation_id']) : 0;
@@ -70,11 +75,16 @@ class CODL_Cart_Handler {
      * Remover producto del carrito
      */
     public function remove_product() {
+        // Verificar nonce para seguridad
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_remove_product_nonce')) {
+            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+        }
+        
         if (!isset($_POST['cart_item_key'])) {
             wp_send_json_error(['message' => 'No cart item key provided.']);
         }
 
-        $cart_item_key = sanitize_text_field($_POST['cart_item_key']);
+        $cart_item_key = sanitize_text_field(wp_unslash($_POST['cart_item_key']));
         $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
 
         $cart = WC()->cart->get_cart();
