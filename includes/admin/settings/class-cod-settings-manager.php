@@ -1,0 +1,183 @@
+<?php
+/**
+ * Settings Manager Class
+ *
+ * @package     Modal_CODL_Form
+ * @since       4.1.0
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+class CODL_Settings_Manager {
+    /**
+     * @var CODL_Settings_Manager
+     */
+    private static $instance = null;
+
+    /**
+     * @var array
+     */
+    private $settings = array();
+
+    /**
+     * Constructor privado para Singleton
+     */
+    private function __construct() {
+        $this->init_settings();
+        $this->init_hooks();
+    }
+
+    /**
+     * Obtiene la instancia única
+     */
+    public static function get_instance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Inicializa las configuraciones
+     */
+    private function init_settings() {
+        $this->settings = array(
+            new CODL_Settings_General(),
+            new CODL_Settings_Design(),
+            new CODL_Settings_Payment_Button(),
+            new CODL_Settings_Text_Customization(),
+            new CODL_Settings_Menu_Icon(),
+            new CODL_Settings_Shortcodes(),
+            new CODL_Settings_Pro_Features()
+        );
+    }
+
+    /**
+     * Inicializa los hooks
+     */
+    private function init_hooks() {
+        add_filter('woocommerce_settings_tabs_array', array($this, 'add_settings_tab'), 50);
+        add_action('woocommerce_sections_cod_form', array($this, 'display_sections'));
+        add_action('woocommerce_settings_cod_form', array($this, 'display_settings'));
+        add_action('woocommerce_update_options_cod_form', array($this, 'save_settings'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles'));
+    }
+
+    /**
+     * Carga los estilos CSS en la administración
+     */
+    public function enqueue_admin_styles($hook) {
+        // Solo cargar en la página de ajustes de WooCommerce
+        if ('woocommerce_page_wc-settings' !== $hook) {
+            return;
+        }
+
+        // Verificar si estamos en la pestaña de nuestro plugin
+        if (!isset($_GET['tab']) || 'cod_form' !== $_GET['tab']) {
+            return;
+        }
+
+        // Registrar y cargar el CSS
+        wp_enqueue_style(
+            'cod-form-admin-styles',
+            CODL_DC_URL . 'assets/css/admin-settings.css',
+            array(),
+            CODL_DC_VERSION
+        );
+
+        // Registrar y cargar el JavaScript
+        wp_enqueue_media();
+        wp_enqueue_script(
+            'cod-form-admin-scripts',
+            CODL_DC_URL . 'assets/js/admin-settings.js',
+            array('jquery', 'media-upload'),
+            CODL_DC_VERSION,
+            true
+        );
+    }
+
+    /**
+     * Agrega la pestaña de configuración
+     */
+    public function add_settings_tab($settings_tabs) {
+        $settings_tabs['cod_form'] = esc_html__('Modal COD Form', 'cod-form-dc-lite');
+        return $settings_tabs;
+    }
+
+    /**
+     * Muestra las secciones de configuración
+     */
+    public function display_sections() {
+        $sections = array();
+        foreach ($this->settings as $setting) {
+            $sections[$setting->get_id()] = $setting->get_title();
+        }
+
+        if (empty($sections)) {
+            return;
+        }
+
+        $current_section = isset($_GET['section']) ? sanitize_text_field($_GET['section']) : 'general';
+
+        echo '<div class="cod-form-settings">';
+        echo '<ul class="subsubsub">';
+        foreach ($sections as $id => $label) {
+            echo '<li>';
+            echo '<a class="' . esc_attr($current_section == $id ? 'current' : '') . '" href="' . esc_url(admin_url('admin.php?page=wc-settings&tab=cod_form&section=' . sanitize_title($id))) . '">' . esc_html($label) . '</a>';
+            echo '</li>';
+        }
+        echo '</ul><br class="clear" />';
+        echo '</div>';
+    }
+
+    /**
+     * Muestra las configuraciones
+     */
+    public function display_settings() {
+        $current_section = isset($_GET['section']) ? sanitize_text_field($_GET['section']) : 'general';
+
+        echo '<div class="cod-form-settings">';
+        foreach ($this->settings as $setting) {
+            if ($setting->get_id() === $current_section) {
+                $setting->display();
+                break;
+            }
+        }
+        echo '</div>';
+    }
+
+    /**
+     * Guarda las configuraciones
+     */
+    public function save_settings() {
+        $current_section = isset($_GET['section']) ? sanitize_text_field($_GET['section']) : 'general';
+
+        foreach ($this->settings as $setting) {
+            if ($setting->get_id() === $current_section) {
+                $setting->save();
+                break;
+            }
+        }
+    }
+
+    /**
+     * Obtiene una configuración específica
+     */
+    public function get_setting($id) {
+        foreach ($this->settings as $setting) {
+            if ($setting->get_id() === $id) {
+                return $setting;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Obtiene todas las configuraciones
+     */
+    public function get_settings() {
+        return $this->settings;
+    }
+} 

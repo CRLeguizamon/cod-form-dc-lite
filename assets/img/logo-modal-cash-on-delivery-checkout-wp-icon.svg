@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 411.25 383.37">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #9fffb8;
+      }
+    </style>
+  </defs>
+  <g id="TREND">
+    <g>
+      <rect class="cls-1" x="110.16" y="79.43" width="22.34" height="152.35" rx="7.5" ry="7.5" transform="translate(276.94 34.28) rotate(90)"/>
+      <rect class="cls-1" x="278.76" y="79.43" width="22.34" height="152.35" rx="7.5" ry="7.5" transform="translate(445.54 -134.31) rotate(90)"/>
+      <rect class="cls-1" x="194.05" y="-69.94" width="23.14" height="320.95" rx="7.5" ry="7.5" transform="translate(296.17 -115.09) rotate(90)"/>
+      <rect class="cls-1" x="163" y="88.58" width="23.14" height="258.84" rx="7.5" ry="7.5" transform="translate(392.57 43.43) rotate(90)"/>
+      <rect class="cls-2" x="131.03" y="289.13" width="149.2" height="31.91" rx="3.41" ry="3.41"/>
+      <path class="cls-1" d="M392.28,383.37H18.97c-10.46,0-18.97-8.51-18.97-18.97V18.97C0,8.51,8.51,0,18.97,0h373.31c10.46,0,18.97,8.51,18.97,18.97v345.43c0,10.46-8.51,18.97-18.97,18.97ZM18.97,16.37c-1.43,0-2.6,1.17-2.6,2.6v345.43c0,1.43,1.17,2.6,2.6,2.6h373.31c1.43,0,2.6-1.16,2.6-2.6V18.97c0-1.43-1.17-2.6-2.6-2.6H18.97Z"/>
+    </g>
+  </g>
+</svg>

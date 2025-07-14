@@ -1,0 +1,483 @@
+/* Estilos para la página de ajustes de Modal COD Form */
+
+/* Estilos para las secciones */
+.woocommerce-settings .subsubsub {
+    margin-bottom: 20px;
+}
+
+.woocommerce-settings .subsubsub li {
+    margin: 0;
+}
+
+.woocommerce-settings .subsubsub a {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #666;
+}
+
+.woocommerce-settings .subsubsub a.current {
+    color: #000;
+    font-weight: 600;
+}
+
+/* Estilos para los campos de configuración */
+.woocommerce-settings .form-table th {
+    padding: 20px 10px 20px 0;
+}
+
+.woocommerce-settings .form-table td {
+    padding: 15px 10px;
+}
+
+/* Estilos para los campos de color */
+.woocommerce-settings .color-picker {
+    width: 100px;
+}
+
+/* Estilos para los campos numéricos */
+.woocommerce-settings input[type="number"] {
+    width: 100px;
+}
+
+/* Estilos para los campos de texto largo */
+.woocommerce-settings textarea {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para las descripciones */
+.woocommerce-settings .description {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Estilos para los campos de selección */
+.woocommerce-settings select {
+    min-width: 200px;
+}
+
+/* Estilos para los campos de checkbox */
+.woocommerce-settings input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Estilos para los campos de radio */
+.woocommerce-settings input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Estilos para los campos de shortcode */
+.woocommerce-settings .shortcode-field {
+    background: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.woocommerce-settings .shortcode-field:hover {
+    background: #eee;
+}
+
+/* Estilos para los mensajes de ayuda */
+.woocommerce-settings .help-tip {
+    color: #666;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Estilos para los campos de URL de imagen */
+.woocommerce-settings .image-url-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para los campos de términos y condiciones */
+.woocommerce-settings .terms-field {
+    width: 100%;
+    max-width: 500px;
+    height: 100px;
+}
+
+/* Estilos para los campos de estado */
+.woocommerce-settings .status-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para los campos de país */
+.woocommerce-settings .country-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para los campos de botón */
+.woocommerce-settings .button-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para los campos de redirección */
+.woocommerce-settings .redirect-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para los campos de icono de menú */
+.woocommerce-settings .menu-icon-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Estilos para los campos de medios */
+.woocommerce-settings .media-upload-button {
+    margin-left: 10px;
+}
+
+.woocommerce-settings .media-preview {
+    margin-top: 10px;
+}
+
+.woocommerce-settings .media-preview img {
+    max-width: 100px;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background: #fff;
+}
+
+/* Estilos específicos para la página de ajustes de Modal COD Form */
+.cod-form-settings {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 5px;
+}
+
+/* Navegación de secciones */
+.cod-form-settings .subsubsub {
+    margin: 0 0 20px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.cod-form-settings .subsubsub li {
+    margin: 3px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.cod-form-settings .subsubsub a {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #666;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+.cod-form-settings .subsubsub a:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.cod-form-settings .subsubsub a.current {
+    background: #f0f0f0;
+    color: #000;
+}
+
+/* Campos de formulario */
+.cod-form-settings .form-table {
+    margin-top: 20px;
+}
+
+.cod-form-settings .form-table th {
+    padding: 20px 10px 20px 0;
+    font-weight: 500;
+}
+
+.cod-form-settings .form-table td {
+    padding: 15px 10px;
+}
+
+/* Inputs y campos de texto */
+.cod-form-settings input[type="text"],
+.cod-form-settings input[type="number"],
+.cod-form-settings input[type="url"],
+.cod-form-settings textarea,
+.cod-form-settings select {
+    width: 100%;
+    max-width: 500px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+.cod-form-settings input[type="text"]:focus,
+.cod-form-settings input[type="number"]:focus,
+.cod-form-settings input[type="url"]:focus,
+.cod-form-settings textarea:focus,
+.cod-form-settings select:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+/* Campos de color */
+.cod-form-settings .color-picker {
+    width: 100px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Campos numéricos */
+.cod-form-settings input[type="number"] {
+    width: 120px;
+}
+
+/* Campos de texto largo */
+.cod-form-settings textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Checkboxes y radio buttons */
+.cod-form-settings input[type="checkbox"],
+.cod-form-settings input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* Campos de shortcode */
+.cod-form-settings .shortcode-field {
+    background: #f8f9fa;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: monospace;
+    transition: all 0.2s ease;
+}
+
+.cod-form-settings .shortcode-field:hover {
+    background: #f0f0f0;
+    border-color: #2271b1;
+}
+
+/* Descripciones y ayuda */
+.cod-form-settings .description {
+    color: #666;
+    font-size: 13px;
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+.cod-form-settings .help-tip {
+    color: #666;
+    font-size: 13px;
+    margin-left: 8px;
+    cursor: help;
+}
+
+/* Campos específicos */
+.cod-form-settings .image-url-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+.cod-form-settings .terms-field {
+    min-height: 120px;
+}
+
+.cod-form-settings .status-field,
+.cod-form-settings .country-field,
+.cod-form-settings .button-field,
+.cod-form-settings .redirect-field,
+.cod-form-settings ,
+.cod-form-settings .menu-icon-field {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Títulos de sección */
+.cod-form-settings h2 {
+    font-size: 1.3em;
+    margin: 1.5em 0 1em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Mensajes de estado */
+.cod-form-settings .notice {
+    margin: 20px 0;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border-left: 4px solid;
+}
+
+.cod-form-settings .notice-success {
+    background: #f0f6fc;
+    border-left-color: #2271b1;
+}
+
+.cod-form-settings .notice-error {
+    background: #fcf0f1;
+    border-left-color: #d63638;
+}
+
+/* Botones */
+.cod-form-settings .button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #2271b1;
+    background: #2271b1;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.cod-form-settings .button-secondary {
+    padding: 0px 12px;
+    border-radius: 6px;
+    background: #2271b1;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.cod-form-settings .button-secondary:hover {
+    background: #135e96;
+    color: #fff;
+}
+
+.cod-form-settings .button:hover {
+    background: #135e96;
+    border-color: #135e96;
+    color: #fff;
+}
+
+/* Campos de selección múltiple */
+.cod-form-settings select[multiple] {
+    height: 120px;
+}
+
+/* Campos de fecha */
+.cod-form-settings input[type="date"] {
+    width: 200px;
+}
+
+/* Campos de tiempo */
+.cod-form-settings input[type="time"] {
+    width: 150px;
+}
+
+/* Campos de rango */
+.cod-form-settings input[type="range"] {
+    width: 200px;
+    margin: 10px 0;
+}
+
+/* Campos de archivo */
+.cod-form-settings input[type="file"] {
+    padding: 10px;
+    border: 2px dashed #ddd;
+    border-radius: 6px;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+
+.cod-form-settings input[type="file"]:hover {
+    border-color: #2271b1;
+    background: #f0f6fc;
+}
+
+/* Estilos para checkboxes tipo On/Off */
+.cod-form-settings .form-table td {
+    position: relative;
+}
+
+.cod-form-settings .form-table td:has(input[type="checkbox"]) {
+    padding-left: 70px;
+}
+
+.cod-form-settings .form-table td:has(input[type="checkbox"])::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 30px;
+    background: #cd3c3c;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s;
+}
+
+.cod-form-settings .form-table td:has(input[type="checkbox"])::after {
+    content: 'OFF';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.35);
+    z-index: 1;
+}
+
+
+.cod-form-settings .form-table td:has(input[type="checkbox"]) input[type="checkbox"] {
+    display: none;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    width: 55px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.cod-form-settings .form-table td:has(input[type="checkbox"]) input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 24px;
+    border-radius: 3px;
+    background: #FFF;
+    top: 3px;
+    left: 3px;
+    transition: left 0.3s;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+}
+
+.cod-form-settings .form-table td:has(input[type="checkbox"]:checked)::before {
+    background: #378b2c;
+}
+
+.cod-form-settings .form-table td:has(input[type="checkbox"]:checked)::after {
+    content: 'ON';
+    color: #fff;
+}
+
+.cod-form-settings .form-table td:has(input[type="checkbox"]:checked) input[type="checkbox"]::before {
+    left: 37px;
+}
+
+/* Campos de radio */
+.cod-form-settings input[type="radio"] {
+    margin-right: 5px;
+} 
