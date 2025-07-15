@@ -3,7 +3,7 @@
  * Product Fields Class
  *
  * @package     Modal_CODL_Form
- * @since       4.1.0
+ * @since       1.0
  */
 
 if (!defined('ABSPATH')) {

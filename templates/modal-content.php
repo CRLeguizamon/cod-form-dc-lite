@@ -4,7 +4,7 @@
  *
  * @package     Modal_CODL_Form
  * @author      Cristian Leguizamón - Devcristian
- * @version     4.1.0.5
+ * @version     1.0
  * 
  * Este template genera el contenido del modal de checkout incluyendo detalles del carrito,
  * opciones de envío, formulario de información del cliente y botón de pago.

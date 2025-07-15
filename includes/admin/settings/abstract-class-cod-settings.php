@@ -3,7 +3,7 @@
  * Abstract Settings Class
  *
  * @package     Modal_COD_Form
- * @since       4.1.0
+ * @since       1.0
  */
 
 if (!defined('ABSPATH')) {

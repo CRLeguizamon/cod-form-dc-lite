@@ -1,9 +1,9 @@
 <?php
 /*
- * Plugin Name: Modal COD Form Lite para woocommerce
+ * Plugin Name: Modal COD Form for woocommerce
  * Description: Con este plugin, el botón "Agregar al carrito" se transforma en un botón personalizable que abre una ventana modal con un formulario sencillo.
- * Version: 1.1.1
- * Author: <a href="https://mcodform.com/" target="_blank">Cristian Leguizamón - MCOD Form</a>
+ * Version: 1.0
+ * Author: <a href="https://mcodform.com/" target="_blank">Cristian Leguizamón</a>
  * Author URI: https://mcodform.com/
  * License: GPLv3
  */
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 /**
  * Defines the constants needed for plugin operation.
  * 
- * @since 4.1.0.5
+ * @since 1.0
  * @return void
  */
 function define_constants_cod() {
@@ -73,7 +73,7 @@ define_constants_cod();
 /**
  * Checks if the PRO plugin is installed and active.
  * 
- * @since 4.1.0.5
+ * @since 1.0
  * @return boolean True if PRO plugin is active, false otherwise.
  */
 function cod_check_pro_plugin() {
@@ -92,7 +92,7 @@ if (!function_exists('is_plugin_active')) {
  * Verifies if WooCommerce is installed and active.
  * Loads necessary files if dependencies are met.
  * 
- * @since 4.1.0.5
+ * @since 1.0
  * @return void
  */
 function cod_check_woocommerce() {
@@ -119,7 +119,7 @@ add_action('plugins_loaded', 'cod_check_woocommerce');
  * Displays a notice if WooCommerce is not active.
  * Informs the user that WooCommerce is required for the plugin to work.
  * 
- * @since 4.1.0.5
+ * @since 1.0
  * @return void
  */
 function cod_woocommerce_missing_notice() {
@@ -135,7 +135,7 @@ function cod_woocommerce_missing_notice() {
 /**
  * Adds action links to the plugins list.
  * 
- * @since 4.1.0.5
+ * @since 1.0
  * @param array $links Existing plugin action links
  * @return array Modified array of action links
  */
