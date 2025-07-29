@@ -1,5 +1,5 @@
-=== Modal COD Form Lite for woocommerce ===
-Contributors: devcristian
+=== Modal COD Form for woocommerce ===
+Contributors: crleguizamon
 Tags: woocommerce, cod, checkout, modal, form
 Requires at least: 5.0
 Tested up to: 6.8
@@ -12,7 +12,7 @@ Transforma el botón "Agregar al carrito" en un formulario modal simplificado pa
 
 == Description ==
 
-Modal COD Form Lite for woocommerce convierte el proceso de checkout tradicional de WooCommerce en una experiencia simplificada mediante un formulario modal. Ideal para tiendas que manejan pagos contra entrega (COD) y dropshippers.
+Modal COD Form for woocommerce convierte el proceso de checkout tradicional de WooCommerce en una experiencia simplificada mediante un formulario modal. Ideal para tiendas que manejan pagos contra entrega (COD) y dropshippers.
 
 = Características principales =
 
@@ -161,4 +161,4 @@ Este plugin no recopila, almacena ni transmite ningún dato personal de los usua
 
 Este plugin se desarrolló específicamente para simplificar el proceso de checkout en tiendas que manejan pagos contra entrega, proporcionando una experiencia optimizada tanto para vendedores como para compradores.
 
-Desarrollado por Cristian Leguizamón - DevCristian 
+Desarrollado por Cristian Leguizamón - crleguizamon

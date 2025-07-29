@@ -2,7 +2,7 @@
 /**
  * Settings Manager Class
  *
- * @package     Modal_CODL_Form
+ * @package     Modal_MODALCODF_Form
  * @since       1.0
  */
 
@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CODL_Settings_Manager {
+class MODALCODF_Settings_Manager {
     /**
-     * @var CODL_Settings_Manager
+     * @var MODALCODF_Settings_Manager
      */
     private static $instance = null;
 
@@ -44,13 +44,13 @@ class CODL_Settings_Manager {
      */
     private function init_settings() {
         $this->settings = array(
-            new CODL_Settings_General(),
-            new CODL_Settings_Design(),
-            new CODL_Settings_Payment_Button(),
-            new CODL_Settings_Text_Customization(),
-            new CODL_Settings_Menu_Icon(),
-            new CODL_Settings_Shortcodes(),
-            new CODL_Settings_Pro_Features()
+            new MODALCODF_Settings_General(),
+            new MODALCODF_Settings_Design(),
+            new MODALCODF_Settings_Payment_Button(),
+            new MODALCODF_Settings_Text_Customization(),
+            new MODALCODF_Settings_Menu_Icon(),
+            new MODALCODF_Settings_Shortcodes(),
+            new MODALCODF_Settings_Pro_Features()
         );
     }
 
@@ -121,9 +121,9 @@ class CODL_Settings_Manager {
         // Registrar y cargar el CSS
         wp_register_style(
             'cod-form-admin-styles',
-            CODL_DC_URL . 'assets/css/admin-settings.css',
+            MODALCODF_DC_URL . 'assets/css/admin-settings.css',
             array(),
-            CODL_DC_VERSION
+            MODALCODF_DC_VERSION
         );
         wp_enqueue_style('cod-form-admin-styles');
 
@@ -131,9 +131,9 @@ class CODL_Settings_Manager {
         wp_enqueue_media();
         wp_register_script(
             'cod-form-admin-scripts',
-            CODL_DC_URL . 'assets/js/admin-settings.js',
+            MODALCODF_DC_URL . 'assets/js/admin-settings.js',
             array('jquery', 'media-upload'),
-            CODL_DC_VERSION,
+            MODALCODF_DC_VERSION,
             true
         );
         wp_enqueue_script('cod-form-admin-scripts');
@@ -148,7 +148,7 @@ class CODL_Settings_Manager {
      * Agrega la pestaña de configuración
      */
     public function add_settings_tab($settings_tabs) {
-        $settings_tabs['cod_form'] = esc_html__('Modal COD Form', 'cod-form-dc-lite');
+        $settings_tabs['cod_form'] = esc_html__('Modal COD Form', 'modal-cod-form');
         return $settings_tabs;
     }
 

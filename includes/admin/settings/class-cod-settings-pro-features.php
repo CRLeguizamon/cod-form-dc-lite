@@ -2,7 +2,7 @@
 /**
  * Pro Features Settings Class
  *
- * @package     Modal_CODL_Form
+ * @package     Modal_MODALCODF_Form
  * @since       1.0
  */
 
@@ -10,13 +10,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CODL_Settings_Pro_Features extends CODL_Settings_Abstract {
+class MODALCODF_Settings_Pro_Features extends MODALCODF_Settings_Abstract {
     /**
      * Constructor
      */
     public function __construct() {
         $this->id = 'pro_features_main';
-        $this->title = esc_html__('🚀 Pro Features', 'cod-form-dc-lite');
+        $this->title = esc_html__('🚀 Pro Features', 'modal-cod-form');
         parent::__construct();
     }
 
@@ -56,7 +56,7 @@ class CODL_Settings_Pro_Features extends CODL_Settings_Abstract {
         echo '<div style="border: 1px solid #ddd; background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">';
         echo '<h3 style="margin: 0 0 10px 0; color: #101538;">🚀 Versión PRO Disponible</h3>';
         echo '<p style="margin: 0 0 10px 0; font-size: 14px; color: #666;">Desbloquea características adicionales como ofertas de cantidad, downsells, webhooks y más.</p>';
-        echo '<a href="' . esc_url(CODL_PRO_URL_BASE . '&utm_medium=pro-features') . '" target="_blank" class="button button-secondary" style="text-decoration: none;">Ver Características PRO</a>';
+        echo '<a href="' . esc_url(MODALCODF_PRO_URL_BASE . '&utm_medium=pro-features') . '" target="_blank" class="button button-secondary" style="text-decoration: none;">Ver Características PRO</a>';
         echo '</div>';
         echo '</td></tr>';
     }

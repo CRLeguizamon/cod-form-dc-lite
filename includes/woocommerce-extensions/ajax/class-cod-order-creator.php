@@ -3,7 +3,7 @@
 /**
  * Clase para manejar la creación de órdenes COD
  *
- * @package CODL_Form_WC_DC
+ * @package MODALCODF_Form_WC_DC
  * @since 1.0.0
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CODL_Order_Creator {
+class MODALCODF_Order_Creator {
     
     /**
      * Crear orden estándar de WooCommerce
@@ -59,7 +59,7 @@ class CODL_Order_Creator {
         // Verificar nonce de seguridad
         if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_form_nonce')) {
             wp_send_json_error(array(
-                'message' => esc_html__('Security verification failed', 'cod-form-dc-lite'),
+                'message' => esc_html__('Security verification failed', 'modal-cod-form'),
                 'error_redirect_url' => home_url()
             ));
             return false;
@@ -80,7 +80,7 @@ class CODL_Order_Creator {
             if (empty($value)) {
                 $error_redirect_url = get_option('cod_form_error_redirect_url', home_url());
                 /* translators: %s: nombre del campo del formulario que es requerido */
-                $error_message = sprintf(esc_html__('Campo %s es requerido', 'cod-form-dc-lite'), $field);
+                $error_message = sprintf(esc_html__('Campo %s es requerido', 'modal-cod-form'), $field);
                 wp_send_json_error(array(
                     'message' => $error_message,
                     'error_redirect_url' => $error_redirect_url
@@ -91,7 +91,7 @@ class CODL_Order_Creator {
 
         // Check if cart is not empty
         if (empty(WC()->cart->get_cart())) {
-            wc_add_notice(esc_html__('No hay productos en el carrito de compra', 'cod-form-dc-lite'), 'error');
+            wc_add_notice(esc_html__('No hay productos en el carrito de compra', 'modal-cod-form'), 'error');
             return false;
         }
 
@@ -110,13 +110,13 @@ class CODL_Order_Creator {
         // Validate and get shipping data
         if ($order_data['shipping_method'] === 'free_shipping') {
             $order_data['shipping_cost'] = 0;
-            $order_data['shipping_label'] = esc_html__('Envío Gratis', 'cod-form-dc-lite');
+            $order_data['shipping_label'] = esc_html__('Envío Gratis', 'modal-cod-form');
         } else {
             $shipping_data = validate_shipping_code($order_data['shipping_code']);
             if ($shipping_data === false) {
                 $error_redirect_url = get_option('cod_form_error_redirect_url', home_url());
                 wp_send_json_error(array(
-                    'message' => esc_html__('Invalid shipping data', 'cod-form-dc-lite'),
+                    'message' => esc_html__('Invalid shipping data', 'modal-cod-form'),
                     'error_redirect_url' => $error_redirect_url
                 ));
                 return false;
@@ -190,7 +190,7 @@ class CODL_Order_Creator {
         
         // Update order status if it is not 'default'
         if ($order_status !== 'default') {
-            $order->update_status($order_status, esc_html__('Awaiting cash on delivery', 'cod-form-dc-lite'));
+            $order->update_status($order_status, esc_html__('Awaiting cash on delivery', 'modal-cod-form'));
         }
         
         // Save the order
@@ -218,7 +218,7 @@ class CODL_Order_Creator {
         
         // Return success response
         wp_send_json_success(array(
-            'message' => esc_html__('Order created successfully', 'cod-form-dc-lite'),
+            'message' => esc_html__('Order created successfully', 'modal-cod-form'),
             'total_amount' => $order_total,
             'success_redirect_url' => $success_redirect_url
         ));

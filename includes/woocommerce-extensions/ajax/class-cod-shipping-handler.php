@@ -3,7 +3,7 @@
 /**
  * Clase para manejar métodos de envío COD
  *
- * @package CODL_Form_WC_DC
+ * @package MODALCODF_Form_WC_DC
  * @since 1.0.0
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CODL_Shipping_Handler {
+class MODALCODF_Shipping_Handler {
     
     /**
      * Obtener métodos de envío disponibles
@@ -19,7 +19,7 @@ class CODL_Shipping_Handler {
     public function get_methods() {
         // Verificar nonce para seguridad
         if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_shipping_methods_nonce')) {
-            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+            wp_die(esc_html__('Security check failed', 'modal-cod-form'));
         }
         
         // Verificar que el parámetro 'state' esté presente
@@ -71,11 +71,11 @@ class CODL_Shipping_Handler {
                             $shipping_methods_html .= '</div>';
                         }
                     } else {
-                        $shipping_methods_html .= '<p>' . esc_html__('No shipping methods available', 'cod-form-dc-lite') . '</p>';
+                        $shipping_methods_html .= '<p>' . esc_html__('No shipping methods available', 'modal-cod-form') . '</p>';
                     }
                 }
             } else {
-                $shipping_methods_html .= '<p>' . esc_html__('No shipping packages available', 'cod-form-dc-lite') . '</p>';
+                $shipping_methods_html .= '<p>' . esc_html__('No shipping packages available', 'modal-cod-form') . '</p>';
             }
 
             // Definir reglas de kses que permitan atributos data-* para inputs
@@ -98,7 +98,7 @@ class CODL_Shipping_Handler {
             
             echo wp_kses($shipping_methods_html, $allowed_html);
         } else {
-            echo '<p>' . esc_html__('Invalid request', 'cod-form-dc-lite') . '</p>';
+            echo '<p>' . esc_html__('Invalid request', 'modal-cod-form') . '</p>';
         }
         
         // Importante: Terminar el script para que no se impriman valores adicionales

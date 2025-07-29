@@ -2,7 +2,7 @@
 /**
  * Product Fields Class
  *
- * @package     Modal_CODL_Form
+ * @package     Modal_MODALCODF_Form
  * @since       1.0
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CODL_Product_Fields {
+class MODALCODF_Product_Fields {
     /**
      * Constructor
      */
@@ -29,8 +29,8 @@ class CODL_Product_Fields {
         
         woocommerce_wp_checkbox(array(
             'id'          => '_cod_disable_button',
-            'label'       => esc_html__('Deshabilitar botón COD', 'cod-form-dc-lite'),
-            'description' => esc_html__('Marque esta opción para deshabilitar el botón COD en este producto', 'cod-form-dc-lite'),
+            'label'       => esc_html__('Deshabilitar botón COD', 'modal-cod-form'),
+            'description' => esc_html__('Marque esta opción para deshabilitar el botón COD en este producto', 'modal-cod-form'),
             'desc_tip'    => true,
         ));
 

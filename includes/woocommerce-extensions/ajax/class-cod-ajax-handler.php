@@ -3,7 +3,7 @@
 /**
  * Clase principal para manejar todos los endpoints AJAX del plugin COD
  *
- * @package CODL_Form_WC_DC
+ * @package MODALCODF_Form_WC_DC
  * @since 1.0.0
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CODL_Ajax_Handler {
+class MODALCODF_Ajax_Handler {
     
     /**
      * Instancias de las clases manejadoras
@@ -32,9 +32,9 @@ class CODL_Ajax_Handler {
      * Inicializar las clases manejadoras
      */
     private function init_handlers() {
-        $this->order_creator = new CODL_Order_Creator();
-        $this->cart_handler = new CODL_Cart_Handler();
-        $this->shipping_handler = new CODL_Shipping_Handler();
+        $this->order_creator = new MODALCODF_Order_Creator();
+        $this->cart_handler = new MODALCODF_Cart_Handler();
+        $this->shipping_handler = new MODALCODF_Shipping_Handler();
     }
     
     /**
@@ -71,7 +71,7 @@ class CODL_Ajax_Handler {
     public function load_modal_content() {
         // Verificar nonce para seguridad
         if (!isset($_REQUEST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['_wpnonce'])), 'cod_load_modal_nonce')) {
-            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+            wp_die(esc_html__('Security check failed', 'modal-cod-form'));
         }
         
         // Recibe los datos enviados por AJAX
@@ -84,7 +84,7 @@ class CODL_Ajax_Handler {
         set_query_var('cod_modal_current_page_title', $current_page_title);
         set_query_var('cod_modal_product_id', $product_id);
 
-        include(CODL_DC_TEM . 'modal-content.php');
+        include(MODALCODF_DC_TEM . 'modal-content.php');
         wp_die();
     }
     

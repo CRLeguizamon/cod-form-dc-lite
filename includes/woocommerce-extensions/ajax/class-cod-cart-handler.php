@@ -3,7 +3,7 @@
 /**
  * Clase para manejar operaciones del carrito COD
  *
- * @package CODL_Form_WC_DC
+ * @package MODALCODF_Form_WC_DC
  * @since 1.0.0
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class CODL_Cart_Handler {
+class MODALCODF_Cart_Handler {
     
     /**
      * Agregar producto al carrito
@@ -19,7 +19,7 @@ class CODL_Cart_Handler {
     public function add_to_cart() {
         // Verificar nonce para seguridad
         if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_add_to_cart_nonce')) {
-            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+            wp_die(esc_html__('Security check failed', 'modal-cod-form'));
         }
         
         // Obtener y validar datos
@@ -48,7 +48,7 @@ class CODL_Cart_Handler {
                         $variation_id = $variations[0]['variation_id'];
                         $added = WC()->cart->add_to_cart($product_id, $quantity, $variation_id);
                     } else {
-                        wp_send_json_error(array('message' => esc_html__('No hay variaciones disponibles para este producto', 'cod-form-dc-lite')));
+                        wp_send_json_error(array('message' => esc_html__('No hay variaciones disponibles para este producto', 'modal-cod-form')));
                         return;
                     }
                 } else {
@@ -59,15 +59,15 @@ class CODL_Cart_Handler {
 
             if ($added) {
                 wp_send_json_success(array(
-                    'message' => esc_html__('Product added to cart', 'cod-form-dc-lite'),
+                    'message' => esc_html__('Product added to cart', 'modal-cod-form'),
                     'cart_hash' => WC()->cart->get_cart_hash(),
                     'cart_count' => WC()->cart->get_cart_contents_count()
                 ));
             } else {
-                wp_send_json_error(array('message' => esc_html__('Failed to add product to cart', 'cod-form-dc-lite')));
+                wp_send_json_error(array('message' => esc_html__('Failed to add product to cart', 'modal-cod-form')));
             }
         } else {
-            wp_send_json_error(array('message' => esc_html__('Invalid product', 'cod-form-dc-lite')));
+            wp_send_json_error(array('message' => esc_html__('Invalid product', 'modal-cod-form')));
         }
     }
     
@@ -77,7 +77,7 @@ class CODL_Cart_Handler {
     public function remove_product() {
         // Verificar nonce para seguridad
         if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'cod_remove_product_nonce')) {
-            wp_die(esc_html__('Security check failed', 'cod-form-dc-lite'));
+            wp_die(esc_html__('Security check failed', 'modal-cod-form'));
         }
         
         if (!isset($_POST['cart_item_key'])) {
@@ -100,7 +100,7 @@ class CODL_Cart_Handler {
 
             $cart_items = WC()->cart->get_cart();
             ob_start();
-            include(CODL_DC_TEM . 'table-content.php');
+            include(MODALCODF_DC_TEM . 'table-content.php');
             $new_cart_content = ob_get_clean();
 
             $subtotal = WC()->cart->get_subtotal();

@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-abstract class CODL_Settings_Abstract {
+abstract class MODALCODF_Settings_Abstract {
     /**
      * @var string ID único de la sección
      */
@@ -108,7 +108,7 @@ abstract class CODL_Settings_Abstract {
                     class="<?php echo esc_attr($field['class'] ?? ''); ?>"
                     style="<?php echo esc_attr($field['css'] ?? ''); ?>"
                 />
-                <button type="button" class="button button-secondary media-upload-button"><?php esc_html_e('Seleccionar Imagen', 'cod-form-dc-lite'); ?></button>
+                <button type="button" class="button button-secondary media-upload-button"><?php esc_html_e('Seleccionar Imagen', 'modal-cod-form'); ?></button>
                 <div class="media-preview">
                     <?php if ($value): ?>
                         <img src="<?php echo esc_url($value); ?>" style="max-width:100px;height:auto;" />

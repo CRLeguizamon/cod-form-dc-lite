@@ -30,7 +30,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 	<?php do_action( 'woocommerce_before_variations_form' ); ?>
 
 	<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
-		<p class="stock out-of-stock"><?php echo esc_html( apply_filters( 'woocommerce_out_of_stock_message', esc_html__( 'Este producto está actualmente agotado y no disponible.', 'cod-form-dc-lite' ) ) ); ?></p>
+		<p class="stock out-of-stock"><?php echo esc_html( apply_filters( 'woocommerce_out_of_stock_message', esc_html__( 'Este producto está actualmente agotado y no disponible.', 'modal-cod-form' ) ) ); ?></p>
 	<?php else : ?>
 		<table class="variations" cellspacing="0" role="presentation">
 			<tbody>
@@ -46,7 +46,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 										'product'   => $product,
 									)
 								);
-								echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Limpiar', 'cod-form-dc-lite' ) . '</a>' ) ) : '';
+								echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Limpiar', 'modal-cod-form' ) . '</a>' ) ) : '';
 							?>
 						</td>
 					</tr>

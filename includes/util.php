@@ -56,7 +56,7 @@ function is_single_product_in_cart() {
 
 /* Cifrar descuento */
 function generate_discount_code($discount_type, $discount_amount) {
-    $secret_key = D_S_K; // Tu clave secreta
+    $secret_key = MODALCODF_UTILKEY; // Tu clave secreta
 
     // Concatenar el tipo y la cantidad del descuento
     $data = $discount_type . '|' . $discount_amount;
@@ -70,7 +70,7 @@ function generate_discount_code($discount_type, $discount_amount) {
 
 /* Descifrar descuento */
 function validate_discount_code($encoded_discount_code) {
-    $secret_key = D_S_K; // Tu clave secreta
+    $secret_key = MODALCODF_UTILKEY; // Tu clave secreta
 
     // Decodificar el código de descuento cifrado
     $decoded = base64_decode($encoded_discount_code);
@@ -110,7 +110,7 @@ function cod_remove_prefix($attribute) {
 
 /* Cifrar costo de envío */
 function generate_shipping_code($shipping_method, $shipping_cost, $shipping_label) {
-    $secret_key = D_S_K; // Tu clave secreta
+    $secret_key = MODALCODF_UTILKEY; // Tu clave secreta
 
     // Concatenar el método, costo y etiqueta del envío
     $data = $shipping_method . '|' . $shipping_cost . '|' . $shipping_label;
@@ -124,7 +124,7 @@ function generate_shipping_code($shipping_method, $shipping_cost, $shipping_labe
 
 /* Descifrar y validar costo de envío */
 function validate_shipping_code($encoded_shipping_code) {
-    $secret_key = D_S_K; // Tu clave secreta
+    $secret_key = MODALCODF_UTILKEY; // Tu clave secreta
 
     // Decodificar el código de envío cifrado
     $decoded = base64_decode($encoded_shipping_code);
